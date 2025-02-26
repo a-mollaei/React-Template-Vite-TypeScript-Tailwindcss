@@ -5,8 +5,15 @@ type MenuButtonProps = {
 };
 
 const MenuButton = ({onClick}: MenuButtonProps) => {
+
     return (
-        <button onClick={onClick} className='text-white p-2 rounded hover:bg-gray-700 transition'>
+        <button 
+            onClick={() => {
+                console.log('click !!!'); 
+                onClick(); 
+            }} 
+            className='text-white p-2 rounded hover:bg-gray-700 transition'
+        >
             <FiMenu size={24} />
         </button>
     );
