@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';  // این وارد کردن سبک‌ها به طور کلی در Swiper 6 و بالاتر است
+import Slide1 from '../assets/Images/ImageSlider/1.svg';
+import Slide2 from '../assets/Images/ImageSlider/2.svg';
+import Slide3 from '../assets/Images/ImageSlider/3.svg';
+import Slide4 from '../assets/Images/ImageSlider/4.svg';
 
 // Import required modules
 import { Autoplay, Pagination, Navigation, Swiper as SwiperType } from "swiper/modules";
@@ -35,16 +39,16 @@ const ImageSlider: React.FC = () => {
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper w-full h-[500px] bg-gray-200"
       >
-        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: 'url("https://via.placeholder.com/800x400")' }}>
+        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: `url(${Slide1})` }}>
           <div className="text-white text-2xl font-semibold">Slide 1</div>
         </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: 'url("https://via.placeholder.com/800x400")' }}>
+        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: `url(${Slide2})` }}>
           <div className="text-white text-2xl font-semibold">Slide 2</div>
         </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: 'url("https://via.placeholder.com/800x400")' }}>
+        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: `url(${Slide3})` }}>
           <div className="text-white text-2xl font-semibold">Slide 3</div>
         </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: 'url("https://via.placeholder.com/800x400")' }}>
+        <SwiperSlide className="flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: `url(${Slide4})` }}>
           <div className="text-white text-2xl font-semibold">Slide 4</div>
         </SwiperSlide>
       </Swiper>
