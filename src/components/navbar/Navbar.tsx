@@ -2,6 +2,7 @@ import MenuButton from "./MenuButton";
 
 type NavbarPorps = {
     toggleSidebar: () => void ;
+    className?: string;
 };
 
 const Navbar = ({toggleSidebar}: NavbarPorps) => {
