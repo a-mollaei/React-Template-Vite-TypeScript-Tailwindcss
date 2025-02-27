@@ -8,7 +8,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false); // وضعیت باز بودن منو
     const sidebarRef = useRef<HTMLDivElement | null>(null); // مرجع به منو
 
-    // استفاده از هوک CloseMenu برای بسته شدن منو وقتی خارج از آن کلیک می‌شود
     CloseMenu(sidebarRef, () => setSidebarOpen(false));
 
     // تابع برای باز و بسته کردن منو

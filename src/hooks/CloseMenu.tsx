@@ -2,18 +2,20 @@ import { useEffect, RefObject } from "react";
 
 const CloseMenu = (ref: RefObject<HTMLElement | null>, callback: () => void) => {
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
+        const handleClickOutside = (event: MouseEvent | TouchEvent | PointerEvent) => {
             if (ref.current && !ref.current.contains(event.target as Node)) {
                 callback();
             }
         };
 
-        // شنیدن رویداد کلیک
         document.addEventListener('mousedown', handleClickOutside);
-        
+        document.addEventListener('pointerdown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside); 
+
         return () => {
-            // حذف رویداد وقتی که کامپوننت از صفحه خارج می‌شود
             document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('pointerdown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
         };
     }, [ref, callback]);
 };
