@@ -1,24 +1,46 @@
 import { useState, useRef } from "react";
 import { products } from "../Mock/Products.ts";
 import Pagination from "./Pagination";
-import CloseMenu from "../hooks/CloseMenu"
+import CloseMenu from "../hooks/CloseMenu";
 
 const ProductTable = () => {
-
-  const menuRef = useRef<HTMLDivElement | null>(null); 
-
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const [menuOpen, setMenuOpen] = useState<number | null>(null);
-  CloseMenu(menuRef , () => setMenuOpen(null));
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 5;
+  CloseMenu(menuRef, () => setMenuOpen(null));
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState<string | "all">("all");
+
+  const productsPerPage = 5;
+  
+  const categories = ["all", ...new Set(products.map((product) => product.category))];
+  
+  const filteredProducts = selectedCategory === "all" 
+    ? products 
+    : products.filter((product) => product.category === selectedCategory);
+  
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   return (
     <div className="p-4 bg-gray-900 text-white">
       <h2 className="text-xl font-semibold mb-4">Latest Products</h2>
+      
+      <div className="mb-4">
+        <select 
+          value={selectedCategory} 
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="bg-gray-800 text-white p-2 rounded"
+        >
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="overflow-x-auto mx-auto">
         <table className="w-full table-auto border-collapse">
           <thead>
@@ -64,7 +86,7 @@ const ProductTable = () => {
 
       <Pagination
         currentPage={currentPage}
-        totalItems={products.length}
+        totalItems={filteredProducts.length}
         itemsPerPage={productsPerPage}
         onPageChange={setCurrentPage}
       />
