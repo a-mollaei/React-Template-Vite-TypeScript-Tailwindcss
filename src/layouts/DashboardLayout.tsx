@@ -2,22 +2,22 @@ import { useState, useRef } from "react";
 import Navbar from "../components/navbar/Navbar";
 import CloseMenu from "../hooks/CloseMenu";
 import ImageSlider from "../components/ImageSlider";
-import ShowProducts from "../components/ShowProducts"
+import ShowProducts from "../components/ShowProducts";
+import SalesChart from '../components/SalesChart';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-    const [sidebarOpen, setSidebarOpen] = useState(false); // وضعیت باز بودن منو
-    const sidebarRef = useRef<HTMLDivElement | null>(null); // مرجع به منو
+    const [sidebarOpen, setSidebarOpen] = useState(false);   
+    const sidebarRef = useRef<HTMLDivElement | null>(null); 
 
     CloseMenu(sidebarRef, () => setSidebarOpen(false));
 
-    // تابع برای باز و بسته کردن منو
     const toggleSidebar = () => {
         setSidebarOpen((prev) => !prev);
     };
 
     return (
-        <div className="flex flex-col h-screen"> {/* به صورت ستون چیده می‌شود */}
-            {/* منو */}
+        <div className="flex flex-col h-screen"> 
+            
             <aside
                 ref={sidebarRef}
                 className={`bg-gray-900 text-white w-64 p-4 transition-transform duration-300 ease-in-out
@@ -33,19 +33,20 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 </ul>
             </aside>
 
-            <div className="flex-1 flex flex-col"> {/* قسمت محتویات صفحه */}
-                {/* Navbar */}
+            <div className="flex-1 flex flex-col"> 
+
                 <Navbar toggleSidebar={toggleSidebar} className="fixed top-0 left-0 w-full z-50"  />
 
-                {/* اسلایدر که بعد از Navbar قرار می‌گیرد */}
-                <div className="w-full mt-4"> {/* به اسلایدر margin-top می‌دهیم تا پایین navbar قرار گیرد */}
+                <div className="w-full mt-4"> 
                     <ImageSlider />
                 </div>
                 <div className="w-full mt-6">
                     <ShowProducts />
                 </div>
+                <div className='w-full mt-4'>
+                    <SalesChart />
+                </div>
 
-                {/* محتوای اصلی صفحه */}
                 <main className="flex-1 p-4">
                     {children}
                 </main>
